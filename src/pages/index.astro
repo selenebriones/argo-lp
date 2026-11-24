@@ -1,0 +1,579 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// IMÁGENES: rutas desde /public (webp de la web actual).
+const cabinas = [
+  {
+    img: '/cabina-equipos-grandes.webp',
+    alt: 'Cabina de pintura industrial para equipos grandes',
+    title: 'Cabinas de pintura para equipos grandes',
+    text: 'Diseñadas para aplicaciones industriales exigentes, ofrecen una estructura robusta para acabados de alta calidad, garantizando eficiencia, seguridad y durabilidad en todos tus proyectos.',
+  },
+  {
+    img: '/cabina-polvo.webp',
+    alt: 'Cabina de pintura en polvo con sistema de recuperación',
+    title: 'Cabinas de pintura en polvo',
+    text: 'Ideales para recubrimientos en polvo, se adaptan a tus necesidades con dos versiones: con sistema de recuperación para capturar exceso de polvo o sin recuperación, una opción más compacta y rentable para aplicaciones de menor escala.',
+  },
+  {
+    img: '/cabina-abierta.webp',
+    alt: 'Cabina de pintura abierta de frente libre',
+    title: 'Cabinas de pintura abiertas',
+    text: 'Flexibles y accesibles para distintos tipos de acabados, con un frente abierto para ahorrar espacio y facilitar la manipulación de productos. Encuentra más de 260 modelos disponibles, con opción a personalización.',
+  },
+  {
+    img: '/cabina-cerrada.webp',
+    alt: 'Cabina de pintura cerrada con puertas y filtros de alta eficiencia',
+    title: 'Cabinas de pintura cerradas',
+    text: 'Perfectas para evitar la contaminación del área de trabajo, asegurando resultados limpios y profesionales con sus puertas con filtros de alta eficiencia, disponibles en múltiples versiones estándar y personalizadas.',
+  },
+];
+
+const equipos = [
+  {
+    img: '/horno-industrial.webp',
+    alt: 'Horno industrial para curado y secado de recubrimientos',
+    title: 'Hornos industriales',
+    text: 'Ideales para procesos de horneado, curado, secado o precalentamiento, ofrecen una transferencia de calor eficiente en su diseño compacto.',
+  },
+  {
+    img: '/cabina-granallado.webp',
+    alt: 'Cabina de granallado abrasivo para tratamiento de superficies',
+    title: 'Cabinas de granallado',
+    text: 'Brindan un entorno seguro y eficiente para el granallado abrasivo con un diseño a la medida que cubre tus requerimientos específicos de tratamiento de superficies.',
+  },
+  {
+    img: '/argo-lp-img-07.webp',
+    alt: 'Lavadora industrial para pretratamiento de piezas',
+    title: 'Lavadoras industriales',
+    text: 'Diseñadas para optimizar los procesos de lavado, garantizan un pretratamiento eficiente para resultados consistentes en un entorno limpio y controlado.',
+  },
+];
+
+const beneficios = [
+  { icon: 'ph-shield-check', title: 'Seguridad', text: 'Reduce riesgo de trabajo, impacto a la salud de tus trabajadores y daño al medio ambiente.' },
+  { icon: 'ph-medal', title: 'Calidad', text: 'Asegura un buen trabajo bajo altos estándares de calidad para una mayor ventaja competitiva.' },
+  { icon: 'ph-trend-up', title: 'Productividad', text: 'Haz tus procesos más eficaces y eficientes, aumentando la productividad de tu empresa.' },
+];
+
+const razones = [
+  {
+    icon: 'ph-cpu',
+    title: 'Calidad superior en tecnología',
+    text: 'Incorporamos equipos con sistemas avanzados e ingeniería de punta para garantizar un desempeño confiable, preciso y eficiente en cada aplicación.',
+  },
+  {
+    icon: 'ph-globe-hemisphere-west',
+    title: 'Manufactura internacional',
+    text: 'Desarrollamos equipos y soluciones bajo estándares globales de fabricación, con respaldo de certificaciones internacionales y presencia en múltiples industrias.',
+  },
+  {
+    icon: 'ph-gear-six',
+    title: 'Longevidad del equipo',
+    text: 'Ofrecemos diseños robustos con materiales de alta resistencia que aseguran un rendimiento duradero por años, incluso en condiciones de trabajo intensivo.',
+  },
+  {
+    icon: 'ph-factory',
+    title: 'A la medida de tu industria',
+    text: 'Brindamos soluciones adaptadas a las industrias automotriz, aeroespacial, de construcción, agrícola, marítima, educativa, militar, ferroviaria, de transporte pesado y trabajo en madera.',
+  },
+];
+
+const certificaciones = [
+  { img: '/cert-nfpa.webp', alt: 'NFPA, National Fire Protection Association' },
+  { img: '/cert-osha.webp', alt: 'OSHA, Occupational Safety and Health Administration' },
+  { img: '/cert-epa.webp', alt: 'EPA, United States Environmental Protection Agency' },
+  { img: '/cert-icc.webp', alt: 'ICC, International Code Council' },
+  { img: '/cert-etl.webp', alt: 'ETL Listed' },
+];
+
+const num = (i: number) => String(i + 1).padStart(2, '0');
+
+const inputClass =
+  'border border-brand-secondary focus:border-brand-primary focus:outline-none px-4 py-3 w-full text-brand-text bg-white transition-colors duration-300';
+const labelClass = 'block font-display text-sm font-medium text-brand-text mb-2';
+---
+
+<Layout transparentNav>
+  <!-- ==================== 1. HERO ==================== -->
+  <section class="hero relative isolate flex min-h-[100svh] items-end overflow-hidden bg-brand-text">
+    <!-- Imagen de fondo con parallax -->
+    <img
+      src="/hero-cabina.webp"
+      alt="Cabina de pintura industrial Argo Group en operación"
+      class="hero-parallax absolute inset-x-0 -top-[7.5%] -z-20 h-[115%] w-full object-cover brightness-[1.35] contrast-[1.05]"
+      width="1366"
+      height="600"
+      fetchpriority="high"
+    />
+    <!-- Degradados: tinte azul petróleo + oscurecido hacia abajo para leer el texto -->
+    <div class="absolute inset-0 -z-10 bg-brand-primary/55 mix-blend-color" aria-hidden="true"></div>
+    <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-linear-to-b from-black/45 to-transparent" aria-hidden="true"></div>
+    <div class="absolute inset-x-0 bottom-0 -z-10 h-3/5 bg-linear-to-t from-black/95 via-black/60 to-transparent" aria-hidden="true"></div>
+
+    <div class="mx-auto grid w-full max-w-7xl grid-cols-1 items-end gap-10 px-4 pb-16 pt-36 sm:px-6 lg:grid-cols-12 lg:px-8 lg:pb-24">
+      <div class="lg:col-span-8">
+        <p class="hero-item flex items-center gap-3 font-display text-sm font-semibold tracking-[0.2em] text-white/85">
+          <span class="h-0.5 w-8 bg-brand-accent"></span>
+          SOLUCIONES INDUSTRIALES
+        </p>
+        <h1 class="hero-item mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl">
+          Cabinas de pintura y soluciones industriales en equipos de acabados
+        </h1>
+      </div>
+
+      <div class="lg:col-span-4 lg:pb-2">
+        <p class="hero-item text-lg leading-relaxed text-white/80">
+          Más de 5 años de experiencia en soluciones de recubrimiento industrial y tratamiento de superficies a la medida que se ajustan e impulsan tu producción
+        </p>
+        <div class="hero-item mt-8">
+          <a
+            href="#contacto"
+            class="inline-flex items-center gap-3 bg-brand-accent px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-brand-primary"
+          >
+            Contáctanos
+            <i class="ph ph-arrow-down-right text-xl" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CERTIFICACIONES (franja de logos) ==================== -->
+  <section class="cert-strip bg-white" aria-labelledby="cert-titulo">
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+      <h2 id="cert-titulo" class="reveal-up mb-10 flex items-center justify-center gap-4 font-display text-sm font-semibold tracking-[0.2em] text-brand-primary lg:mb-14">
+        <span class="h-0.5 w-8 bg-brand-accent" aria-hidden="true"></span>
+        CERTIFICACIONES
+        <span class="h-0.5 w-8 bg-brand-accent" aria-hidden="true"></span>
+      </h2>
+      <ul class="stagger-grid flex flex-wrap items-center justify-center gap-y-2 sm:flex-nowrap sm:justify-between">
+        {certificaciones.map((c) => (
+          <li class="stagger-card group flex w-1/3 items-center justify-center px-2 sm:w-auto sm:flex-1 sm:px-4">
+            <img
+              src={c.img}
+              alt={c.alt}
+              class="h-auto w-full max-w-[130px] object-contain opacity-25 sm:max-w-[200px] grayscale transition-[opacity,filter] duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+              width="625"
+              height="625"
+              loading="lazy"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== 2. CABINAS DE PINTURA ==================== -->
+  <section id="cabinas">
+    <h2 class="sr-only">Cabinas de pintura</h2>
+
+    <!-- Bloques divididos: foto a sangre + panel azul (alternando lado) -->
+    <div>
+      {cabinas.map((c, i) => (
+        <article class="split-block group grid grid-cols-1 lg:grid-cols-2">
+          <div class:list={['split-photo relative h-72 overflow-hidden sm:h-96 lg:h-auto lg:min-h-[560px]', i % 2 === 1 && 'lg:order-2']}>
+            <img
+              src={c.img}
+              alt={c.alt}
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              width="540"
+              height="350"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="relative flex flex-col justify-center overflow-hidden bg-brand-primary px-6 py-14 sm:px-10 lg:px-16 lg:py-20">
+            <div class="split-text max-w-xl">
+              <p class="flex items-center gap-3 font-display text-xs font-semibold tracking-[0.2em] text-white/75 sm:text-sm">
+                <span class="h-0.5 w-8 bg-brand-accent" aria-hidden="true"></span>
+                CABINAS DE PINTURA
+              </p>
+              <h3 class="mt-5 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white md:text-4xl xl:text-5xl">
+                {c.title}
+              </h3>
+              <p class="mt-6 text-lg leading-relaxed text-white/80">{c.text}</p>
+
+              <div class="mt-10 flex items-end justify-between border-t border-white/20 pt-6">
+                <span class="font-display text-7xl font-bold leading-none text-white/15 md:text-8xl" aria-hidden="true">{num(i)}</span>
+                <a
+                  href="#contacto"
+                  class="mb-2 inline-flex items-center gap-2 font-display text-sm font-semibold text-white transition-colors duration-300 hover:text-white/70"
+                  aria-label={`Cotizar ${c.title.toLowerCase()}`}
+                >
+                  Contáctanos
+                  <i class="ph ph-arrow-up-right text-lg text-brand-accent" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+
+    <!-- Banner: servicios incluidos -->
+    <div class="bg-brand-accent">
+      <p class="reveal-up mx-auto max-w-7xl px-4 py-6 text-center font-display text-lg font-semibold text-white sm:px-6 md:text-xl lg:px-8">
+        Instalación, capacitación y mantenimiento incluidos
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== 3. EQUIPOS DE ACABADO (pestañas) ==================== -->
+  <section id="equipos" class="overflow-hidden bg-white">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8 lg:py-28">
+      <!-- Izquierda: imagen + cuadro azul oscuro superpuesto -->
+      <div class="reveal-up relative order-2 lg:order-1 lg:col-span-6 lg:pb-28">
+        <div class="relative aspect-4/5 w-full overflow-hidden bg-brand-muted sm:aspect-4/3 lg:aspect-4/5 lg:w-[82%]">
+          {equipos.map((e, i) => (
+            <img
+              src={e.img}
+              alt={e.alt}
+              data-equipo-img={i}
+              class:list={[
+                'equipo-img absolute inset-0 h-full w-full object-cover',
+                i === 0 ? 'is-active' : '',
+              ]}
+              width="350"
+              height="350"
+              loading="lazy"
+            />
+          ))}
+        </div>
+
+        <div class="equipo-box relative -mt-14 ml-auto w-[90%] bg-brand-primary px-7 py-6 sm:w-[80%] sm:px-9 sm:py-7 lg:absolute lg:bottom-0 lg:right-0 lg:mt-0 lg:w-[80%] lg:px-10 lg:py-8">
+          <div class="grid">
+            {equipos.map((e, i) => (
+              <div
+                data-equipo-text={i}
+                class:list={['equipo-text col-start-1 row-start-1', i === 0 ? 'is-active' : '']}
+                aria-hidden={i === 0 ? 'false' : 'true'}
+              >
+                <h3 class="font-display text-xl font-bold leading-tight text-white md:text-2xl">{e.title}</h3>
+                <p class="mt-3 leading-relaxed text-white/80">{e.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Derecha: título y pestañas -->
+      <div class="order-1 lg:order-2 lg:col-span-5 lg:col-start-8">
+        <p class="reveal-up flex items-center gap-3 font-display text-sm font-semibold tracking-[0.2em] text-brand-primary">
+          <span class="h-0.5 w-8 bg-brand-accent" aria-hidden="true"></span>
+          SOLUCIONES INDUSTRIALES
+        </p>
+        <h2 class="reveal-up mt-5 font-display text-3xl font-bold leading-[1.1] tracking-tight text-brand-primary md:text-4xl xl:text-5xl">Equipos de acabado</h2>
+
+        <div class="reveal-up mt-10" role="tablist" aria-label="Equipos de acabado">
+          {equipos.map((e, i) => (
+            <button
+              type="button"
+              role="tab"
+              data-equipo-tab={i}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              class="equipo-tab group flex w-full cursor-pointer items-baseline gap-5 border-b border-brand-secondary/70 py-6 text-left"
+            >
+              <span class="equipo-tab-num font-display text-2xl font-bold transition-colors duration-300 md:text-3xl">{num(i)}.</span>
+              <span class="equipo-tab-title font-display text-2xl font-bold transition-colors duration-300 md:text-3xl">{e.title}</span>
+              <i class="ph ph-arrow-right equipo-tab-arrow ml-auto self-center text-2xl text-brand-accent transition-all duration-300" aria-hidden="true"></i>
+            </button>
+          ))}
+        </div>
+
+        <a
+          href="#contacto"
+          class="reveal-up mt-10 inline-flex items-center gap-3 bg-brand-accent px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-brand-primary"
+        >
+          Contáctanos
+          <i class="ph ph-arrow-down-right text-xl" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. BANNER DE CONVERSIÓN ==================== -->
+  <section class="relative overflow-hidden bg-brand-primary">
+    <div class="relative mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 px-8 py-16 md:px-14 lg:flex-row">
+      <p class="reveal-up max-w-2xl text-center font-display text-2xl font-bold leading-tight text-white md:text-4xl lg:text-left">
+        Optimiza tu línea de producción con la mejor tecnología en cabinas de pintura
+      </p>
+      <a
+        href="#contacto"
+        class="reveal-up shrink-0 bg-brand-accent px-8 py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-white hover:text-brand-primary"
+      >
+        Contacta a un asesor
+      </a>
+    </div>
+  </section>
+
+  <!-- ==================== 5. BENEFICIOS ==================== -->
+  <section id="beneficios" class="relative isolate overflow-hidden bg-brand-muted">
+    <!-- Fondo tenue: foto de la nave en gris, casi transparente -->
+    <img
+      src="/bg_beneficios.jpg"
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-[0.12] grayscale"
+      width="1600"
+      height="900"
+      loading="lazy"
+    />
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <h2 class="reveal-up mb-10 font-display text-3xl font-bold leading-[1.1] tracking-tight text-brand-primary md:text-4xl xl:text-5xl">Beneficios</h2>
+      <ul class="stagger-grid grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        {beneficios.map((b, i) => (
+          <li class:list={['stagger-card', i % 2 === 0 && 'md:mt-16']}>
+            <div class="group flex h-full min-h-[340px] flex-col justify-between bg-white p-10 shadow-[0_10px_40px_-20px_rgb(0_0_0/0.15)] transition-colors duration-300 hover:bg-brand-accent lg:min-h-[400px] lg:p-12">
+              <i class={`ph-light ${b.icon} text-7xl leading-none text-brand-accent transition-colors duration-300 group-hover:text-white lg:text-8xl`} aria-hidden="true"></i>
+              <div class="mt-16">
+                <h3 class="font-display text-xl font-bold text-brand-text transition-colors duration-300 group-hover:text-white">{b.title}</h3>
+                <p class="mt-3 leading-relaxed text-brand-text/80 transition-colors duration-300 group-hover:text-white/90">{b.text}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== 6. ¿POR QUÉ ELEGIRNOS? ==================== -->
+  <section id="por-que-elegirnos" class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <h2 class="reveal-up text-center font-display text-3xl font-bold leading-[1.1] tracking-tight text-brand-primary md:text-4xl xl:text-5xl">¿Por qué elegirnos?</h2>
+
+      <div class="stagger-grid mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+        {razones.map((r) => (
+          <article class="stagger-card group relative overflow-hidden border border-brand-secondary bg-white p-8 transition-[translate,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lg">
+            <!-- Borde rojo que se dibuja en secuencia: arriba → derecha → abajo → izquierda (y se borra al revés) -->
+            <span class="border-draw absolute left-0 top-0 h-0.5 w-full origin-left scale-x-0 bg-brand-accent delay-[540ms] group-hover:scale-x-100 group-hover:delay-0" aria-hidden="true"></span>
+            <span class="border-draw absolute right-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-brand-accent delay-[360ms] group-hover:scale-y-100 group-hover:delay-[180ms]" aria-hidden="true"></span>
+            <span class="border-draw absolute bottom-0 right-0 h-0.5 w-full origin-right scale-x-0 bg-brand-accent delay-[180ms] group-hover:scale-x-100 group-hover:delay-[360ms]" aria-hidden="true"></span>
+            <span class="border-draw absolute bottom-0 left-0 h-full w-0.5 origin-bottom scale-y-0 bg-brand-accent delay-0 group-hover:scale-y-100 group-hover:delay-[540ms]" aria-hidden="true"></span>
+            <i class={`ph ${r.icon} absolute right-8 top-8 text-4xl text-brand-accent`} aria-hidden="true"></i>
+            <h3 class="pr-14 font-display text-xl font-bold text-brand-text">{r.title}</h3>
+            <p class="mt-3 leading-relaxed text-brand-text/80">{r.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BANNER GFS (montado entre ¿Por qué? y Contacto) ==================== -->
+  <div class="relative z-20 -mb-24 px-4 sm:px-6 lg:-mb-20 lg:px-8">
+    <div class="reveal-up mx-auto flex max-w-5xl flex-col border-y-4 border-brand-secondary shadow-2xl md:flex-row">
+      <div class="flex shrink-0 items-center justify-center bg-white px-10 py-8 md:px-12">
+        <img src="/logo-gfs.webp" alt="Global Finishing Solutions" class="h-20 w-auto md:h-24" width="1000" height="460" loading="lazy" />
+      </div>
+      <div class="flex flex-1 items-center bg-brand-primary px-8 py-8 md:px-12">
+        <p class="text-center leading-relaxed text-white/90 md:text-left">
+          Somos representantes en la República Mexicana de Global Finishing Solutions ® (GFS) el principal fabricante mundial de cabinas de pintura y sistemas de acabado para muchas industrias.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 7. GFS Y CONTACTO ==================== -->
+  <section id="contacto" class="relative isolate overflow-hidden bg-brand-text">
+    <!-- Fondo: foto de hornos con tinte azul petróleo y oscurecido para leer el texto -->
+    <img
+      src="/bg_footer_contacto.webp"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 -z-20 h-full w-full object-cover"
+      width="2000"
+      height="900"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 -z-10 bg-brand-primary/55 mix-blend-color" aria-hidden="true"></div>
+    <div class="absolute inset-0 -z-10 bg-linear-to-r from-black/75 via-black/40 to-black/15" aria-hidden="true"></div>
+
+    <div class="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 pb-20 pt-44 sm:px-6 lg:grid-cols-12 lg:px-8 lg:pb-28 lg:pt-48">
+      <div class="lg:col-span-5">
+        <img
+          src="/logo-argo-blanco.webp"
+          alt="Argo de México"
+          class="reveal-up mb-10 h-16 w-auto md:h-20"
+          width="602"
+          height="246"
+          loading="lazy"
+        />
+
+        <ul class="reveal-up space-y-5 text-white">
+          <li class="flex items-start gap-4">
+            <i class="ph ph-map-pin mt-0.5 text-xl text-brand-accent" aria-hidden="true"></i>
+            <span>Calle 39 Pte. 3515, Col. Las Ánimas, Puebla.</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <i class="ph ph-phone mt-0.5 text-xl text-brand-accent" aria-hidden="true"></i>
+            <a href="tel:+525580164524" class="transition-colors duration-300 hover:text-white/70">(+52) 55 8016 4524</a>
+          </li>
+          <li class="flex items-start gap-4">
+            <i class="ph ph-envelope-simple mt-0.5 text-xl text-brand-accent" aria-hidden="true"></i>
+            <a href="mailto:mflores@argogroup.com.mx" class="break-all transition-colors duration-300 hover:text-white/70">mflores@argogroup.com.mx</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-7">
+        <div class="reveal-up border border-brand-secondary bg-white p-8 shadow-2xl md:p-10">
+          <h3 class="mb-6 font-display text-2xl font-bold text-brand-primary">Cotiza tu cabina a la medida</h3>
+          <!-- Destino del formulario pendiente (action / endpoint). -->
+          <form class="space-y-5" method="post">
+            <div>
+              <label for="nombre" class={labelClass}>Nombre</label>
+              <input id="nombre" name="nombre" type="text" autocomplete="name" required class={inputClass} />
+            </div>
+            <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div>
+                <label for="correo" class={labelClass}>Correo electrónico</label>
+                <input id="correo" name="correo" type="email" autocomplete="email" required class={inputClass} />
+              </div>
+              <div>
+                <label for="telefono" class={labelClass}>Teléfono</label>
+                <input id="telefono" name="telefono" type="tel" autocomplete="tel" required class={inputClass} />
+              </div>
+            </div>
+            <div>
+              <label for="mensaje" class={labelClass}>Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="4" class={`${inputClass} resize-y`}></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full cursor-pointer bg-brand-accent py-4 font-display font-semibold text-white transition-colors duration-300 hover:bg-brand-primary"
+            >
+              Contáctanos
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Patrón geométrico del banner: líneas blancas al 5 % */
+  /* Cada lado del borde tarda lo mismo; el retraso arma la secuencia */
+  .border-draw {
+    /* Sin el atajo "transition" para no pisar los delay-* de Tailwind */
+    transition-property: scale;
+    transition-duration: 180ms;
+    transition-timing-function: linear;
+  }
+
+  /* Imagen y texto activos: fundido cruzado */
+  .equipo-img {
+    opacity: 0;
+    scale: 1.06;
+    transition: opacity 600ms ease, scale 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .equipo-img.is-active {
+    opacity: 1;
+    scale: 1;
+  }
+  .equipo-text {
+    opacity: 0;
+    translate: 0 12px;
+    visibility: hidden;
+    transition: opacity 400ms ease, translate 400ms ease, visibility 0s linear 400ms;
+  }
+  .equipo-text.is-active {
+    opacity: 1;
+    translate: 0 0;
+    visibility: visible;
+    transition: opacity 500ms ease 150ms, translate 500ms ease 150ms, visibility 0s;
+  }
+
+  /* Pestañas */
+  .equipo-tab-num {
+    color: color-mix(in oklab, var(--color-brand-primary) 45%, transparent);
+  }
+  .equipo-tab-title {
+    color: color-mix(in oklab, var(--color-brand-text) 45%, transparent);
+  }
+  .equipo-tab-arrow {
+    opacity: 0;
+    translate: -8px 0;
+  }
+  .equipo-tab:hover .equipo-tab-title {
+    color: var(--color-brand-text);
+  }
+  .equipo-tab[aria-selected='true'] .equipo-tab-num {
+    color: var(--color-brand-accent);
+  }
+  .equipo-tab[aria-selected='true'] .equipo-tab-title {
+    color: var(--color-brand-primary);
+  }
+  .equipo-tab[aria-selected='true'] .equipo-tab-arrow {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .equipo-tab:focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 4px;
+  }
+
+</style>
+
+<!-- Pestañas de Equipos de acabado: cambian imagen y contenido del cuadro -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('[data-equipo-tab]');
+    const imgs = document.querySelectorAll('[data-equipo-img]');
+    const texts = document.querySelectorAll('[data-equipo-text]');
+    const activar = (idx) => {
+      tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.equipoTab === idx)));
+      imgs.forEach((img) => img.classList.toggle('is-active', img.dataset.equipoImg === idx));
+      texts.forEach((t) => {
+        const on = t.dataset.equipoText === idx;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-hidden', String(!on));
+      });
+    };
+    tabs.forEach((tab) => tab.addEventListener('click', () => activar(tab.dataset.equipoTab)));
+  });
+</script>
+
+<!-- Animaciones propias de la página. Las clases .reveal-up y .stagger-grid/.stagger-card
+     se animan desde Layout.astro para no duplicar los ScrollTrigger. -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Entrada inicial del hero
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    tl.from('.hero-parallax', { scale: 1.08, duration: 1.6, ease: 'power2.out' }).from(
+      '.hero-item',
+      { y: 28, autoAlpha: 0, duration: 0.8, stagger: 0.1 },
+      0.2
+    );
+
+    // Bloques divididos de cabinas: la foto se revela como cortina y el texto sube
+    gsap.utils.toArray('.split-block').forEach((block, i) => {
+      const photo = block.querySelector('.split-photo');
+      const img = photo.querySelector('img');
+      const fromLeft = i % 2 === 0;
+      const tl = gsap.timeline({ scrollTrigger: { trigger: block, start: 'top 75%', toggleActions: 'play none none none' } });
+      tl.fromTo(
+        photo,
+        { clipPath: fromLeft ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' },
+        { clipPath: 'inset(0 0% 0 0%)', duration: 1.1, ease: 'power3.inOut' }
+      )
+        .from(img, { scale: 1.15, duration: 1.4, ease: 'power2.out', clearProps: 'scale' }, 0)
+        .from(block.querySelectorAll('.split-text > *'), { y: 24, autoAlpha: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out' }, 0.35);
+    });
+
+    // Parallax sutil de la imagen de fondo
+    gsap.fromTo(
+      '.hero-parallax',
+      { yPercent: 0 },
+      {
+        yPercent: 6,
+        ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true },
+      }
+    );
+  });
+</script>

@@ -1,0 +1,161 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Navbar transparente sobre el hero hasta hacer scroll */
+  transparentNav?: boolean;
+}
+
+const {
+  title = 'Cabinas de pintura y soluciones industriales en equipos de acabados | Argo Group',
+  transparentNav = false,
+  description = 'Cabinas de pintura y equipos de acabado para recubrimiento industrial. Argo Group, representante de Global Finishing Solutions (GFS) en México: diseño, instalación y soporte técnico.',
+} = Astro.props;
+
+const navLinks = [
+  { href: '#cabinas', label: 'Cabinas de pintura' },
+  { href: '#equipos', label: 'Equipos de acabado' },
+  { href: '#beneficios', label: 'Beneficios' },
+  { href: '#por-que-elegirnos', label: '¿Por qué elegirnos?' },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Phosphor Icons -->
+    <script is:inline src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  </head>
+
+  <body class="bg-brand-surface text-brand-text font-sans antialiased">
+    <!-- Navbar -->
+    <header
+      id="site-header"
+      data-top={transparentNav ? 'true' : 'false'}
+      class:list={[
+        'group inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300',
+        'bg-white/90 backdrop-blur-md border-brand-secondary/50',
+        'data-[top=true]:bg-transparent data-[top=true]:backdrop-blur-none data-[top=true]:border-white/15',
+        transparentNav ? 'fixed' : 'sticky',
+      ]}
+    >
+      <nav class="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8" aria-label="Principal">
+        <a href="#" class="relative shrink-0" aria-label="Argo Group, inicio">
+          <img src="/logo-argo.webp" alt="Argo Group" class="h-10 w-auto transition-opacity duration-300 group-data-[top=true]:opacity-0" width="539" height="222" />
+          <img src="/logo-argo-blanco.webp" alt="" aria-hidden="true" class="absolute inset-0 h-10 w-auto opacity-0 transition-opacity duration-300 group-data-[top=true]:opacity-100" width="602" height="246" />
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-6 xl:gap-8">
+          {navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="whitespace-nowrap font-display text-[15px] font-medium text-brand-text hover:text-brand-primary group-data-[top=true]:text-white group-data-[top=true]:hover:text-white/70 transition-colors duration-300"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href="#contacto"
+          class="shrink-0 whitespace-nowrap bg-brand-accent hover:bg-brand-primary text-white font-display font-semibold px-6 py-2.5 transition-colors duration-300"
+        >
+          Contáctanos
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-brand-secondary bg-brand-surface">
+      <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <p class="text-center text-sm text-brand-text/70">
+          2025© Argo de México. Todos los derechos reservados. Diseño y desarrollo por agencia de marketing dígital Futurité.
+        </p>
+      </div>
+    </footer>
+
+    {transparentNav && (
+      <script is:inline>
+        (() => {
+          const header = document.getElementById('site-header');
+          const update = () => header.setAttribute('data-top', window.scrollY < 40 ? 'true' : 'false');
+          update();
+          window.addEventListener('scroll', update, { passive: true });
+        })();
+      </script>
+    )}
+
+    <!-- Librerías -->
+    <script is:inline src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <!-- Animaciones globales -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Respeta usuarios con movimiento reducido: el contenido queda visible sin animar.
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        // Entrada suave desde abajo
+        gsap.utils.toArray('.reveal-up').forEach((el) => {
+          gsap.from(el, {
+            y: 32,
+            autoAlpha: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' },
+          });
+        });
+
+        // Cascada de tarjetas dentro de una cuadrícula
+        gsap.utils.toArray('.stagger-grid').forEach((grid) => {
+          const cards = grid.querySelectorAll('.stagger-card');
+          if (!cards.length) return;
+          gsap.from(cards, {
+            y: 24,
+            autoAlpha: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            stagger: 0.12,
+            scrollTrigger: { trigger: grid, start: 'top 82%', toggleActions: 'play none none none' },
+          });
+        });
+
+        // Recalcula posiciones cuando terminan de cargar fuentes e imágenes
+        window.addEventListener('load', () => ScrollTrigger.refresh());
+        document.fonts?.ready.then(() => ScrollTrigger.refresh());
+      });
+    </script>
+  </body>
+</html>
